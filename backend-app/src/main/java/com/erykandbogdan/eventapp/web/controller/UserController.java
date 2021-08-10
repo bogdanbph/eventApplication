@@ -21,12 +21,12 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getCandidates() {
+    public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userMapper.convertEntities(userService.getAllUsers()));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDto> getCandidate(@PathVariable("id") BigDecimal id) {
+    public ResponseEntity<UserDto> getUser(@PathVariable("id") BigDecimal id) {
         return ResponseEntity.ok(userMapper.convert(userService.findUserById(id)));
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<BigDecimal> saveOrUpdateCandidate(@RequestBody @Valid UserDto userDto) {
+    public ResponseEntity<BigDecimal> saveOrUpdateUser(@RequestBody @Valid UserDto userDto) {
         User user = userMapper.convert(userDto);
         userService.saveOrUpdateUser(user);
         return ResponseEntity.ok(user.getId());

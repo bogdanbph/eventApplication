@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -29,5 +30,8 @@ public class User extends BaseEntity {
 
     @Column(name = "email", nullable = false, length = 100)
     private String email;
+
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
 
 }
