@@ -2,13 +2,13 @@ package com.erykandbogdan.eventapp.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +20,15 @@ import java.time.LocalDate;
 public class JwtUsernameAndPasswordAuthenticatorFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtConfig jwtConfig;
+    private final SecretKey secretKey;
 
-    public JwtUsernameAndPasswordAuthenticatorFilter(AuthenticationManager authenticationManager) {
+    public JwtUsernameAndPasswordAuthenticatorFilter(AuthenticationManager authenticationManager,
+                                                     JwtConfig jwtConfig,
+                                                     SecretKey secretKey) {
         this.authenticationManager = authenticationManager;
+        this.jwtConfig = jwtConfig;
+        this.secretKey = secretKey;
     }
 
     @Override
@@ -48,17 +54,16 @@ public class JwtUsernameAndPasswordAuthenticatorFilter extends UsernamePasswordA
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        final String key = "%$^VVREerow98543#@F#9vi90da-$##^#%$^VVREerow98543#@F#9vi90da-$##^#%$^VVREerow98543#@F#9vi90da-$##^#%$^VVREerow98543#@F#9vi90da-$##^#%$^VVREerow98543#@F#9vi90da-$##^#";
 
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new java.util.Date())
                 .setExpiration(Date.valueOf(LocalDate.now().plusWeeks(2)))
-                .signWith(Keys.hmacShaKeyFor(key.getBytes()))
+                .signWith(secretKey)
                 .compact();
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
     }
 }
 
