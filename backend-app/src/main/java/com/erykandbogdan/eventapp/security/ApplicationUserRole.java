@@ -5,11 +5,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.erykandbogdan.eventapp.security.ApplicationUserPermission.USER_READ;
-import static com.erykandbogdan.eventapp.security.ApplicationUserPermission.USER_WRITE;
+import static com.erykandbogdan.eventapp.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
-    USER(Set.of(USER_READ,USER_WRITE));
+    USER(Set.of(USER_READ,USER_WRITE)), ADMIN(Set.of(ADMIN_READ, ADMIN_WRITE));
 
     private final Set<ApplicationUserPermission> permissions;
 

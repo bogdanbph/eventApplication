@@ -62,7 +62,7 @@ public class UserService {
 
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.longValue());
         }
 
         // add logic to see if the client still has events ongoing or planned in the close future
