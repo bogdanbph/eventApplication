@@ -5,7 +5,7 @@ import com.erykandbogdan.eventapp.exception.NotFoundException;
 import java.math.BigDecimal;
 
 public class UserNotFoundException extends NotFoundException {
-    public UserNotFoundException(BigDecimal id) {
+    public UserNotFoundException(Long id) {
         super("user.not.found", "User with id " + id + " does not exist");
     }
 }
