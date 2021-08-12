@@ -1,8 +1,9 @@
-package com.erykandbogdan.eventapp.auth;
+package com.erykandbogdan.eventapp.service;
 
 import com.erykandbogdan.eventapp.exception.notfound.UserNotFoundException;
-import com.erykandbogdan.eventapp.web.controller.register.token.ConfirmationToken;
-import com.erykandbogdan.eventapp.web.controller.register.token.ConfirmationTokenService;
+import com.erykandbogdan.eventapp.model.ConfirmationToken;
+import com.erykandbogdan.eventapp.model.ApplicationUser;
+import com.erykandbogdan.eventapp.repository.ApplicationUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

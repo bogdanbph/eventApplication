@@ -1,5 +1,6 @@
 package com.erykandbogdan.eventapp.jwt;
 
+import com.erykandbogdan.eventapp.security.config.JwtConfig;
 import com.google.common.base.Strings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

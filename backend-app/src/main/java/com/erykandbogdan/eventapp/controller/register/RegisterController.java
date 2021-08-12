@@ -1,5 +1,6 @@
-package com.erykandbogdan.eventapp.web.controller.register;
+package com.erykandbogdan.eventapp.controller.register;
 
+import com.erykandbogdan.eventapp.service.RegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

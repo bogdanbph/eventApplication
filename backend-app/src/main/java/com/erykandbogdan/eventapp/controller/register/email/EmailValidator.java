@@ -1,4 +1,4 @@
-package com.erykandbogdan.eventapp.web.controller.register.email;
+package com.erykandbogdan.eventapp.controller.register.email;
 
 import org.springframework.stereotype.Service;
 

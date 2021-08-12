@@ -1,6 +1,6 @@
-package com.erykandbogdan.eventapp.web.controller.register.token;
+package com.erykandbogdan.eventapp.model;
 
-import com.erykandbogdan.eventapp.auth.ApplicationUser;
+import com.erykandbogdan.eventapp.model.ApplicationUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

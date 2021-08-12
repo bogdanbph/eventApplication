@@ -1,4 +1,4 @@
-package com.erykandbogdan.eventapp.jwt;
+package com.erykandbogdan.eventapp.security.config;
 
 import com.google.common.net.HttpHeaders;
 import org.springframework.boot.context.properties.ConfigurationProperties;

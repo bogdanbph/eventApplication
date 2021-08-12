@@ -3,7 +3,7 @@ package com.erykandbogdan.eventapp.exception.config;
 import com.erykandbogdan.eventapp.exception.BadRequestException;
 import com.erykandbogdan.eventapp.exception.NotFoundException;
 import com.erykandbogdan.eventapp.exception.UnauthorizedException;
-import com.erykandbogdan.eventapp.web.dto.ErrorResponseDto;
+import com.erykandbogdan.eventapp.model.dto.ErrorResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -1,12 +1,11 @@
-package com.erykandbogdan.eventapp.web.controller.register;
+package com.erykandbogdan.eventapp.service;
 
-import com.erykandbogdan.eventapp.auth.ApplicationUser;
-import com.erykandbogdan.eventapp.auth.ApplicationUserService;
+import com.erykandbogdan.eventapp.model.ApplicationUser;
+import com.erykandbogdan.eventapp.controller.register.RegisterRequest;
 import com.erykandbogdan.eventapp.security.ApplicationUserRole;
-import com.erykandbogdan.eventapp.web.controller.register.email.EmailSender;
-import com.erykandbogdan.eventapp.web.controller.register.email.EmailValidator;
-import com.erykandbogdan.eventapp.web.controller.register.token.ConfirmationToken;
-import com.erykandbogdan.eventapp.web.controller.register.token.ConfirmationTokenService;
+import com.erykandbogdan.eventapp.controller.register.email.EmailSender;
+import com.erykandbogdan.eventapp.controller.register.email.EmailValidator;
+import com.erykandbogdan.eventapp.model.ConfirmationToken;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

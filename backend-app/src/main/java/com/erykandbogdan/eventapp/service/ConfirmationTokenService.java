@@ -1,5 +1,7 @@
-package com.erykandbogdan.eventapp.web.controller.register.token;
+package com.erykandbogdan.eventapp.service;
 
+import com.erykandbogdan.eventapp.model.ConfirmationToken;
+import com.erykandbogdan.eventapp.repository.ConfirmationTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

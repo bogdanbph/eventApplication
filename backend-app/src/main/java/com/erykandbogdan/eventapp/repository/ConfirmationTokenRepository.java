@@ -1,5 +1,6 @@
-package com.erykandbogdan.eventapp.web.controller.register.token;
+package com.erykandbogdan.eventapp.repository;
 
+import com.erykandbogdan.eventapp.model.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

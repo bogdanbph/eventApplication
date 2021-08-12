@@ -1,7 +1,7 @@
-package com.erykandbogdan.eventapp.web.controller;
+package com.erykandbogdan.eventapp.controller;
 
-import com.erykandbogdan.eventapp.auth.ApplicationUser;
-import com.erykandbogdan.eventapp.auth.ApplicationUserService;
+import com.erykandbogdan.eventapp.model.ApplicationUser;
+import com.erykandbogdan.eventapp.service.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

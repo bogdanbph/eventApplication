@@ -1,4 +1,4 @@
-package com.erykandbogdan.eventapp.web.controller.register;
+package com.erykandbogdan.eventapp.controller.register;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

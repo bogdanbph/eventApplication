@@ -1,7 +1,6 @@
 package com.erykandbogdan.eventapp.security.config;
 
-import com.erykandbogdan.eventapp.auth.ApplicationUserService;
-import com.erykandbogdan.eventapp.jwt.JwtConfig;
+import com.erykandbogdan.eventapp.service.ApplicationUserService;
 import com.erykandbogdan.eventapp.jwt.JwtTokenVerifier;
 import com.erykandbogdan.eventapp.jwt.JwtUsernameAndPasswordAuthenticatorFilter;
 import org.springframework.beans.factory.annotation.Autowired;

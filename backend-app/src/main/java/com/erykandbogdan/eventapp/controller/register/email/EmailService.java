@@ -1,4 +1,4 @@
-package com.erykandbogdan.eventapp.web.controller.register.email;
+package com.erykandbogdan.eventapp.controller.register.email;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package com.erykandbogdan.eventapp.jwt;
 
+import com.erykandbogdan.eventapp.security.config.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;

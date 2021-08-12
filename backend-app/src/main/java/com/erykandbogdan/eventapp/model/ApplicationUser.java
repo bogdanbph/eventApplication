@@ -1,4 +1,4 @@
-package com.erykandbogdan.eventapp.auth;
+package com.erykandbogdan.eventapp.model;
 
 import com.erykandbogdan.eventapp.security.ApplicationUserRole;
 import lombok.*;
