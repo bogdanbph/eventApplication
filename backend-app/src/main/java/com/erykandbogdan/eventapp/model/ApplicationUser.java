@@ -1,5 +1,6 @@
 package com.erykandbogdan.eventapp.model;
 
+import com.erykandbogdan.eventapp.model.base.BaseEntity;
 import com.erykandbogdan.eventapp.security.ApplicationUserRole;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,7 +19,7 @@ import java.util.Collection;
 @Entity
 @Builder
 @AllArgsConstructor
-public class ApplicationUser implements UserDetails {
+public class ApplicationUser extends BaseEntity implements UserDetails {
 
 
     @SequenceGenerator(

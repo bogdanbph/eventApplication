@@ -1,10 +1,14 @@
 package com.erykandbogdan.eventapp.service;
 
-import com.erykandbogdan.eventapp.exception.notfound.UserNotFoundException;
+import com.erykandbogdan.eventapp.exception.notfound.AppUserNotFoundException;
+import com.erykandbogdan.eventapp.exception.notfound.PageNotFoundException;
 import com.erykandbogdan.eventapp.model.ConfirmationToken;
 import com.erykandbogdan.eventapp.model.ApplicationUser;
 import com.erykandbogdan.eventapp.repository.ApplicationUserRepository;
+import com.erykandbogdan.eventapp.util.PageContent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,6 +31,10 @@ public class ApplicationUserService implements UserDetailsService {
     private final ApplicationUserRepository appUserRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+
+    // TODO: Take this implementation for future usages
+    public final static int PAGE_SIZE = 10;
+
 
     public ApplicationUserService(ApplicationUserRepository appUserRepository, BCryptPasswordEncoder passwordEncoder, ConfirmationTokenService confirmationTokenService) {
         this.appUserRepository = appUserRepository;
@@ -82,15 +91,34 @@ public class ApplicationUserService implements UserDetailsService {
         return appUserRepository.enableAppUser(email);
     }
 
-    public List<ApplicationUser> getAllUsers() {
-        return appUserRepository.findAll();
+    public PageContent<ApplicationUser> findAll() {
+        Long totalNumberOfPages = appUserRepository.count() / PAGE_SIZE + 1;
+        List<ApplicationUser> interviews = appUserRepository.findAll();
+        Collections.reverse(interviews);
+        return new PageContent<>(totalNumberOfPages, interviews);
+    }
+
+    public PageContent<ApplicationUser> findAll(int pageNumber, int pageSize) {
+        try {
+            long totalNumberOfPages = appUserRepository.count() / PAGE_SIZE + 1;
+            if (pageNumber > totalNumberOfPages) {
+
+                throw new IllegalArgumentException();
+            }
+            PageRequest pageRequest = PageRequest.of(pageNumber-1, pageSize, Sort.by("createDateTIme").descending());
+            PageContent<ApplicationUser> listOfInterviews = new PageContent<>(totalNumberOfPages, appUserRepository.findAll(pageRequest).getContent());
+            return listOfInterviews;
+        }
+        catch (IllegalArgumentException ex) {
+            throw new PageNotFoundException(pageNumber);
+        }
     }
 
     public ApplicationUser findUserById(Long id) {
         Optional<ApplicationUser> tempAppUser = appUserRepository.findById(id);
 
         if (tempAppUser.isEmpty()) {
-            throw new UserNotFoundException(id);
+            throw new AppUserNotFoundException(id);
         }
 
         return tempAppUser.get();
@@ -100,7 +128,7 @@ public class ApplicationUserService implements UserDetailsService {
         Optional<ApplicationUser> tempAppUser = appUserRepository.findById(id);
         if (tempAppUser.isEmpty()) {
             log.warn("The user with id {} not found", id);
-            throw new UserNotFoundException(id);
+            throw new AppUserNotFoundException(id);
         }
 
         // TODO: implement logic for events still ongoing or planned in close future

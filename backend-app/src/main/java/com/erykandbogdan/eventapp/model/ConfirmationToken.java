@@ -1,6 +1,7 @@
 package com.erykandbogdan.eventapp.model;
 
 import com.erykandbogdan.eventapp.model.ApplicationUser;
+import com.erykandbogdan.eventapp.model.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
-public class ConfirmationToken {
+public class ConfirmationToken extends BaseEntity {
     @SequenceGenerator(
             name = "confirmation_token_sequence",
             sequenceName = "confirmation_token_sequence",
