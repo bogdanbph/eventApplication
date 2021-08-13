@@ -17,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.crypto.SecretKey;
 import java.util.Properties;
@@ -24,7 +26,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     private final BCryptPasswordEncoder passwordEncoder;
     private final ApplicationUserService applicationUserService;
     private final SecretKey secretKey;
@@ -43,19 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /* http.csrf().disable()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(new JwtUsernameAndPasswordAuthenticatorFilter(authenticationManager(), jwtConfig, secretKey))
-                .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticatorFilter.class)
-                .authorizeRequests()
-                .antMatchers("/api/v1/registration")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
-*/
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -80,6 +70,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedMethods("*");
     }
 
     @Bean

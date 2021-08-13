@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 public class JwtUsernameAndPasswordAuthenticatorFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -60,7 +64,7 @@ public class JwtUsernameAndPasswordAuthenticatorFilter extends UsernamePasswordA
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new java.util.Date())
-                .setExpiration(Date.valueOf(LocalDate.now().plusWeeks(2)))
+                .setExpiration(Date.valueOf(LocalDate.now().plusDays(1)))
                 .signWith(secretKey)
                 .compact();
 
