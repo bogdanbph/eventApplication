@@ -1,2 +1,3 @@
-# eventApplication
-Weddings and more :)
+# Learning Platform
+
+Online tutorials.
